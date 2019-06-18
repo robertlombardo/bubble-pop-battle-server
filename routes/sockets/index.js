@@ -27,18 +27,20 @@ exports.init = app => {
         transports : process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
     }
 
-    const server = HTTP.createServer(app)
+    // const server = HTTP.createServer(app)
 
-    console.log('\nprocess.env:')
-    console.log(process.env)
+    // console.log('\nprocess.env:')
+    // console.log(process.env)
 
     const PORT = process.env.PORT || 3333
-    server.once(`listening`, () => {
+    // server.once(`listening`, () => {
+    //     console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
+    // });
+    app.listen(PORT, () => {
         console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
-    });
-    server.listen(PORT)
+    })
 
-    const io = SocketIO.listen(server, options)
+    const io = SocketIO.listen(app, options)
 
     const emitActiveGames = () => { io.of(SOCKET_PATH).emit(`active_games`, {active_games: getGameStates(active_games)}) }
     
