@@ -2,7 +2,7 @@ import SocketIO   from 'socket.io'
 import HTTP       from 'http'
 import GameEngine from '../../game-engine'
 
-const SOCKET_PATH = `/sockets`
+const SOCKET_PATH = `/` // `/sockets`
 
 const sockets_by_player_id = {}
 const active_games         = {}
