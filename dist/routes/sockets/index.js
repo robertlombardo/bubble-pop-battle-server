@@ -29,7 +29,9 @@ exports.init = function (app) {
 
   var server = _http.default.createServer(app);
 
-  var PORT = 3333;
+  console.log('\nprocess.env:');
+  console.log(process.env);
+  var PORT = process.env.PORT || 3333;
   server.once("listening", function () {
     console.info("\nMultiplayer Bubble Pop - Sockets server is listening on port: ".concat(PORT));
   });
