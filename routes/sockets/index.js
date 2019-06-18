@@ -21,26 +21,24 @@ exports.init = app => {
             `https://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
             `http://bubblepopbattle.withkoji.com:*`,
             `https://bubblepopbattle.withkoji.com:*`,
-            `http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
-            `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
+            `http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/:*`,
+            `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/:*`,
         ].join(` `),
         transports : process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
     }
 
-    // const server = HTTP.createServer(app)
+    const server = HTTP.createServer(app)
 
     // console.log('\nprocess.env:')
     // console.log(process.env)
 
     const PORT = process.env.PORT || 3333
-    // server.once(`listening`, () => {
-    //     console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
-    // });
-    app.listen(PORT, () => {
+    server.once(`listening`, () => {
         console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
-    })
+    });
+    server.listen(PORT)
 
-    const io = SocketIO.listen(app, options)
+    const io = SocketIO.listen(server, options)
 
     const emitActiveGames = () => { io.of(SOCKET_PATH).emit(`active_games`, {active_games: getGameStates(active_games)}) }
     
