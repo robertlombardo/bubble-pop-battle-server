@@ -1,1 +1,1 @@
-web: npm i -g babel-cli && npm run compile && node dist/index.js
+web: npm run compile && node dist/index.js
