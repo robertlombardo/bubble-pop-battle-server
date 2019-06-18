@@ -22,7 +22,7 @@ exports.init = app => {
 
     const server = HTTP.createServer(app)
 
-    const PORT = 3333
+    const PORT = process.env.PORT || 3333
     server.once(`listening`, () => {
         console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
     });
