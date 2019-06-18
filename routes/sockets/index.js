@@ -24,7 +24,7 @@ exports.init = app => {
             `http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
             `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
         ].join(` `),
-        transports : process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
+        transports : [`websocket`, `polling`], // process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
     }
 
     const server = HTTP.createServer(app)
