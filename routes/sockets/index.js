@@ -2,7 +2,7 @@ import SocketIO   from 'socket.io'
 import HTTP       from 'http'
 import GameEngine from '../../game-engine'
 
-const SOCKET_PATH = `/` // `/sockets`
+const SOCKET_PATH = `/sockets`
 
 const sockets_by_player_id = {}
 const active_games         = {}
@@ -25,7 +25,7 @@ exports.init = app => {
             `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
         ]/*.join(` `)*/,
         // origins: `*`,
-        transports : [`websocket`, `polling`], // process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
+        transports : process.env.NODE_ENV === `production` ? [`websocket`] : [`polling`],
     }
 
     const server = HTTP.createServer(app)

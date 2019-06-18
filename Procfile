@@ -1,1 +1,1 @@
-web: PORT=$PORT node dist/index.js
+web: NODE_ENV=production PORT=$PORT node dist/index.js

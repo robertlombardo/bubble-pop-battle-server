@@ -23,8 +23,11 @@ var getGameStates = function getGameStates(active_games) {
 exports.init = function (app) {
   var options = {
     path: SOCKET_PATH,
-    origins: ["http://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "https://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "http://bubblepopbattle.withkoji.com:*", "https://bubblepopbattle.withkoji.com:*", "http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/:*", "https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/:*"].join(" "),
-    transports: process.env.NODE_ENV === "production" ? ["websocket", "polling"] : ["polling"]
+    origins: ["http://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "https://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "http://bubblepopbattle.withkoji.com:*", "https://bubblepopbattle.withkoji.com:*", "http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*", "https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*"]
+    /*.join(` `)*/
+    ,
+    // origins: `*`,
+    transports: process.env.NODE_ENV === "production" ? ["websocket"] : ["polling"]
   };
 
   var server = _http.default.createServer(app); // console.log('\nprocess.env:')
