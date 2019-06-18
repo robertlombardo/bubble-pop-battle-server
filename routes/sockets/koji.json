@@ -1,0 +1,8 @@
+{
+  "routes": [{
+    "name": "Sockets",
+    "path": "backend/routes/sockets",
+    "route": "/sockets",
+    "isProtected": false
+  }]
+}
