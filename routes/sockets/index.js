@@ -33,7 +33,7 @@ exports.init = app => {
     // console.log('\nprocess.env:')
     // console.log(process.env)
 
-    const PORT = process.env.PORT || 3333
+    const PORT = 80 // process.env.PORT || 3333
     server.once(`listening`, () => {
         console.info(`\nMultiplayer Bubble Pop - Sockets server is listening on port: ${PORT}`)
     });
