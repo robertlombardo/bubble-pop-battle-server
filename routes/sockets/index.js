@@ -23,7 +23,7 @@ exports.init = app => {
             `https://bubblepopbattle.withkoji.com:*`,
             `http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
             `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
-        ].join(` `),
+        ]/*.join(` `)*/,
         // origins: `*`,
         transports : [`websocket`, `polling`], // process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
     }
