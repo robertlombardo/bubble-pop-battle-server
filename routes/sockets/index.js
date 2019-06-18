@@ -16,7 +16,14 @@ const getGameStates = active_games => {
 exports.init = app => {
     const options = {
         path       : SOCKET_PATH,
-        origins    : `https://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:* http://bubblepopbattle.withkoji.com:* https://bubblepopbattle.withkoji.com:*`,
+        origins    : [
+            `http://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`.
+            `https://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
+            `http://bubblepopbattle.withkoji.com:*`,
+            `https://bubblepopbattle.withkoji.com:*`,
+            `http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/`,
+            `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com/`,
+        ].join(` `),
         transports : [`polling`]
     }
 
