@@ -17,7 +17,7 @@ exports.init = app => {
     const options = {
         path       : SOCKET_PATH,
         origins    : [
-            `http://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`.
+            `http://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
             `https://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
             `http://bubblepopbattle.withkoji.com:*`,
             `https://bubblepopbattle.withkoji.com:*`,
