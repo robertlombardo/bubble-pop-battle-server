@@ -24,7 +24,7 @@ const GameEngine = (initial_player, io, SOCKET_PATH, match_secs) => {
             state.bubbles = state.bubbles.filter(b => now - b.created_at < 120000)
 
             const new_bubbles = []
-            const num         = 10 + Math.random() * 10
+            const num         = 10 * Object.keys(state.players).length + Math.random() * 15
 
             for (let i = 0; i < num; ++i) {
                 new_bubbles.push({
