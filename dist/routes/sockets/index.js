@@ -23,11 +23,9 @@ var getGameStates = function getGameStates(active_games) {
 exports.init = function (app) {
   var options = {
     path: SOCKET_PATH,
-    origins: ["http://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "https://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "http://bubblepopbattle.withkoji.com:*", "https://bubblepopbattle.withkoji.com:*", "http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*", "https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*"].join(" "),
-    // origins: `*`,
-    transports:
-    /*process.env.NODE_ENV === `production` ? [`websocket`] :*/
-    ["polling"]
+    origins: ["*:*", "http://127.0.0.1:*", "http://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "https://".concat(process.env.KOJI_SERVICE_HOSTNAME_frontend, ":*"), "http://bubblepopbattle.withkoji.com:*", "https://bubblepopbattle.withkoji.com:*", "http://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*", "https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*"].join(" ") // origins: `*`,
+    // transports : process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
+
   };
 
   var server = _http.default.createServer(app); // console.log('\nprocess.env:')
@@ -49,7 +47,8 @@ exports.init = function (app) {
   };
 
   io.of(SOCKET_PATH).on("connection", function (socket) {
-    // initialize a new player (TODO - don't do this if we're pulling player from localStorage)
+    console.log('got a connection!'); // initialize a new player (TODO - don't do this if we're pulling player from localStorage)
+
     var player_id = new Date().getTime().toString();
     var player = socket.player = {
       id: player_id,
@@ -59,6 +58,7 @@ exports.init = function (app) {
       color_b: '#' + (Math.random() * 0xFFFFFF << 0).toString(16)
     };
     setTimeout(function () {
+      console.log('emitting player_state, active_games');
       socket.emit("player_state", {
         player: player
       });

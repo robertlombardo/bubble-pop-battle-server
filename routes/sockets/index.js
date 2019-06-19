@@ -17,6 +17,8 @@ exports.init = app => {
     const options = {
         path       : SOCKET_PATH,
         origins    : [
+            `*:*`,
+            `http://127.0.0.1:*`,
             `http://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
             `https://${process.env.KOJI_SERVICE_HOSTNAME_frontend}:*`,
             `http://bubblepopbattle.withkoji.com:*`,
@@ -25,7 +27,7 @@ exports.init = app => {
             `https://frontend-dee728a3-6698-4305-92d2-8a9f34f0af19.koji-staging.com:*`,
         ].join(` `),
         // origins: `*`,
-        transports : /*process.env.NODE_ENV === `production` ? [`websocket`] :*/ [`polling`],
+        // transports : process.env.NODE_ENV === `production` ? [`websocket`, `polling`] : [`polling`],
     }
 
     const server = HTTP.createServer(app)
@@ -44,6 +46,7 @@ exports.init = app => {
     const emitActiveGames = () => { io.of(SOCKET_PATH).emit(`active_games`, {active_games: getGameStates(active_games)}) }
     
     io.of(SOCKET_PATH).on(`connection`, socket => {
+        console.log('got a connection!')
 
         // initialize a new player (TODO - don't do this if we're pulling player from localStorage)
         const player_id = new Date().getTime().toString()
@@ -55,6 +58,7 @@ exports.init = app => {
             color_b      : '#'+(Math.random()*0xFFFFFF<<0).toString(16),
         }
         setTimeout(() => {
+            console.log('emitting player_state, active_games')
             socket.emit(`player_state`, {player})
             socket.emit(`active_games`, {active_games: getGameStates(active_games)})
         }, 500)
