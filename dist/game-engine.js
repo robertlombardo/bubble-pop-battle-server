@@ -30,7 +30,7 @@ var GameEngine = function GameEngine(initial_player, io, SOCKET_PATH, match_secs
         return now - b.created_at < 120000;
       });
       var new_bubbles = [];
-      var num = 10 + Math.random() * 10;
+      var num = 10 * Object.keys(state.players).length + Math.random() * 15;
 
       for (var i = 0; i < num; ++i) {
         new_bubbles.push({

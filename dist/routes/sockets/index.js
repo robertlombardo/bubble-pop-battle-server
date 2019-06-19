@@ -28,9 +28,7 @@ exports.init = function (app) {
 
   };
 
-  var server = _http.default.createServer(app); // console.log('\nprocess.env:')
-  // console.log(process.env)
-
+  var server = _http.default.createServer(app);
 
   var PORT = process.env.PORT || 3333;
   server.once("listening", function () {
